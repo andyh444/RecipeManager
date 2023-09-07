@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ingredient } from '../sharedtypes/Ingredient';
+import { Ingredient } from '../../../../common/sharedtypes/Ingredient';
 
 export interface IIngredientControlProps {
     ingredient: Ingredient

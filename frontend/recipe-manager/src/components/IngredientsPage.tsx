@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Ingredient } from '../sharedtypes/Ingredient';
+import { Ingredient } from '../../../../common/sharedtypes/Ingredient';
 import { IngredientControl } from './IngredientControl';
 
 interface IngredientsPageProps {
