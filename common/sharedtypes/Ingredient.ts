@@ -1,4 +1,6 @@
+import { IngredientProperties } from "./IngredientProperties";
+
 export interface Ingredient {
     id: number;
-    name: string;
+    properties: IngredientProperties;
 }

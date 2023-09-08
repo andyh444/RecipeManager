@@ -10,7 +10,7 @@ export function IngredientControl (props: IIngredientControlProps) {
   return (
     <div>
       <p>
-        {props.ingredient.name}
+        {props.ingredient.properties.name}
         <span>
             <button onClick={() => props.onDeleteIngredient(props.ingredient.id)}>X</button>
         </span>

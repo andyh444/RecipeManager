@@ -3,14 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import IngredientsPage from './components/IngredientsPage';
 import { Ingredient } from '../../../common/sharedtypes/Ingredient';
+import { IngredientProperties } from '../../../common/sharedtypes/IngredientProperties';
 
 function App() {
-  /*const [ingredients, setIngredients] = useState<Ingredient[]>([
-    { id: 1, name: 'Ingredient 1' },
-    { id: 2, name: 'Ingredient 2' },
-    { id: 3, name: 'Ingredient 3' },
-  ]);*/
-
   const [ingredients, setIngredients] = useState([]);
   useEffect(() =>
   {
@@ -55,7 +50,7 @@ function App() {
     }
   };
 
-  const handleAddIngredient = async (ingredient: Ingredient) => {
+  const handleAddIngredient = async (ingredient: IngredientProperties) => {
     //setIngredients((prevIngredients) => [...prevIngredients, ingredient]);
     try {
       const apiUrl = 'http://localhost:3001/api/addingredient'; // Replace with your API endpoint

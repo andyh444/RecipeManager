@@ -1,7 +1,7 @@
 import router from './router'
 
-var express = require('express')
-var cors = require('cors')
+const express = require('express')
+const cors = require('cors')
 const app = express();
 const port = 3001; // Set the port for your server
 

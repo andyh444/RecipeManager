@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
 import { Ingredient } from '../../../../common/sharedtypes/Ingredient';
 import { IngredientControl } from './IngredientControl';
+import { IngredientProperties } from '../../../../common/sharedtypes/IngredientProperties';
 
 interface IngredientsPageProps {
     ingredients: Ingredient[];
     onDeleteIngredient: (id: number) => void;
-    onAddIngredient: (ingredient: Ingredient) => void;
+    onAddIngredient: (ingredient: IngredientProperties) => void;
 }
 
 const IngredientsPage: React.FC<IngredientsPageProps> = (props) => {
@@ -13,9 +14,9 @@ const IngredientsPage: React.FC<IngredientsPageProps> = (props) => {
   const ingredientEntryRef = useRef<HTMLInputElement>(null);
 
   const addIngredient = () => {
-    const ingredient = { id: props.ingredients.length + 1, name: ingredientEntryRef.current?.value ?? ""};
-    console.log("adding ingredient", ingredient);
-    props.onAddIngredient(ingredient);
+    const ingredientProperties = { name: ingredientEntryRef.current?.value ?? ""};
+    console.log("adding ingredient", ingredientProperties);
+    props.onAddIngredient(ingredientProperties);
   }
 
   return  (
