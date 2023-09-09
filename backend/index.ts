@@ -1,4 +1,4 @@
-import router from './router'
+import router from './api/router'
 
 const express = require('express')
 const cors = require('cors')
