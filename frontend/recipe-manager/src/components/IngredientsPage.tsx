@@ -25,19 +25,18 @@ const IngredientsPage: React.FC<IngredientsPageProps> = (props) => {
   return  (
     <div>
         <h1>Ingredients</h1>
-        <IngredientEditor onFinish={i => props.onAddIngredient(i)} />
+        <IngredientEditor buttonText='Add' onFinish={i => props.onAddIngredient(i)} />
         {props.ingredients.map((ingredient) => (
-          <div>
-            <IngredientControl key={ingredient.id}
-                              ingredient={ingredient}
-                              onDeleteIngredient={props.onDeleteIngredient}
-                              onEditIngredient={editIngredient}
+          <div key={ingredient.id}>
+            <IngredientControl ingredient={ingredient}
+                               onDeleteIngredient={props.onDeleteIngredient}
+                               onEditIngredient={editIngredient}
             />
             {
               ingredient.id === editIndex
-              && <IngredientEditor onFinish={i => {
-                setEditIndex(-1)
-                props.onUpdateIngredient(ingredient.id, i)
+              && <IngredientEditor buttonText='Update' onFinish={i => {
+                                   props.onUpdateIngredient(ingredient.id, i)
+                                   setEditIndex(-1)
               }}/>
             }
         </div>

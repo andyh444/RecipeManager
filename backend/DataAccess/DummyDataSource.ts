@@ -13,19 +13,29 @@ let DummyDataSource:IngredientsDataSource = {
         return Promise.resolve(ingredients);
     },
     deleteIngredientById: (id: number): Promise<boolean> => {
-        const index:number = ingredients.findIndex((ingredient) => ingredient.id === id);
-        let deletedIngredient:Ingredient | null;
+        const index: number = ingredients.findIndex((ingredient) => ingredient.id === id);
+        let deletedIngredient: Ingredient | null;
         if (index === -1) {
             deletedIngredient = null;
         } else {
-          deletedIngredient = ingredients.splice(index, 1)[0];
+            deletedIngredient = ingredients.splice(index, 1)[0];
         }
         return Promise.resolve(deletedIngredient !== null);
     },
     addIngredient: (ingredient: IngredientProperties): Promise<Ingredient> => {
-        const newIngredient:Ingredient = { id: ingredientIndex++, properties: ingredient }
+        const newIngredient: Ingredient = { id: ingredientIndex++, properties: ingredient };
         ingredients.push(newIngredient);
         return Promise.resolve(newIngredient);
+    },
+    updateIngredientById: function (id: number, ingredient: IngredientProperties): Promise<Ingredient> {
+        const newIngredient: Ingredient = { id: id, properties: ingredient };
+        const index: number = ingredients.findIndex((ingredient) => ingredient.id === id);
+        if (index === -1) {
+
+        } else  {
+            ingredients[index] = newIngredient;
+        }
+        return Promise.resolve(newIngredient)
     }
 }
 

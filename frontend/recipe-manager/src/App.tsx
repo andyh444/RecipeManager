@@ -54,7 +54,7 @@ function App() {
   const handleAddIngredient = async (ingredient: IngredientProperties) => {
     //setIngredients((prevIngredients) => [...prevIngredients, ingredient]);
     try {
-      const apiUrl = serverUrl + 'api/api/addingredient'; // Replace with your API endpoint
+      const apiUrl = serverUrl + 'api/addingredient'; // Replace with your API endpoint
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -76,12 +76,31 @@ function App() {
     }
   }
 
+  const handleUpdateIngredient = async(id:number, ingredient:IngredientProperties) => {
+      const apiUrl = serverUrl + `api/updateingredient/${id}`; // Replace with your API endpoint
+      const response = await fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(ingredient),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const addedIngredient = await response.json();
+
+      getIngredients()
+  }
+
   return (
     <div className="App">
       <IngredientsPage ingredients={ingredients}
                        onDeleteIngredient={handleDeleteIngredient}
                        onAddIngredient={handleAddIngredient}
-                       onUpdateIngredient={() => {}}
+                       onUpdateIngredient={handleUpdateIngredient}
       />
     </div>
   );

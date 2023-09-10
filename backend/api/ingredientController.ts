@@ -8,6 +8,12 @@ IngredientsDataAccess.InjectDataSource(DummyDataSource);
 
 export default class IngredientController
 {
+    static async apiUpdateIngredientById(req : Request, res: Response) {
+        const id:number = Number(req.params.id)
+        const properties:IngredientProperties = req.body
+        res.json(await IngredientsDataAccess.updateIngredientById(id, properties));
+    }
+
     static async apiGetIngredients(req : Request, res: Response) {
         res.json(await IngredientsDataAccess.getIngredients());
     }

@@ -3,6 +3,7 @@ import { IngredientProperties } from "../../../../common/sharedtypes/IngredientP
 
 export interface IIngredientEditorProps {
     onFinish: (ingredient:IngredientProperties) => void;
+    buttonText:string;
 }
 
 export function IngredientEditor (props: IIngredientEditorProps) {
@@ -25,7 +26,7 @@ export function IngredientEditor (props: IIngredientEditorProps) {
                 <input ref={ingredientEntryRef} placeholder='Enter an ingredient'></input>
                 <input ref={shelfLifeRef} type='number' min={ 1 } placeholder='Enter a shelf life (Days)'></input>
                 <input ref={unitRef} placeholder='Enter a unit (gram, millilitre, single)'></input>
-                <button onClick={() => props.onFinish(getIngredient())}>Add</button>
+                <button onClick={() => props.onFinish(getIngredient())}>{props.buttonText}</button>
             </span>
         </div>  
     );

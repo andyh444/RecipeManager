@@ -20,4 +20,8 @@ export default class IngredientsDataAccess {
     static async addIngredient(ingredient: IngredientProperties): Promise<Ingredient> {
         return await dataSource.addIngredient(ingredient);
     }
+
+    static async updateIngredientById(id: number, ingredient: IngredientProperties): Promise<Ingredient> {
+        return await dataSource.updateIngredientById(id, ingredient)
+    }
 }
