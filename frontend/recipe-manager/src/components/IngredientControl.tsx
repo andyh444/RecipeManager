@@ -4,6 +4,7 @@ import { Ingredient } from '../../../../common/sharedtypes/Ingredient';
 export interface IIngredientControlProps {
     ingredient: Ingredient
     onDeleteIngredient: (id: number) => void;
+    onEditIngredient: (id: number) => void;
 }
 
 export function IngredientControl (props: IIngredientControlProps) {
@@ -16,6 +17,7 @@ export function IngredientControl (props: IIngredientControlProps) {
           Shelf life (days): {props.ingredient.properties.shelfLifeDays}
         </span>
         <span>
+            <button onClick={() => props.onEditIngredient(props.ingredient.id)}>Edit</button>
             <button onClick={() => props.onDeleteIngredient(props.ingredient.id)}>X</button>
         </span>
       </p>

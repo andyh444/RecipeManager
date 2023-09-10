@@ -7,6 +7,7 @@ import { IngredientProperties } from '../../../common/sharedtypes/IngredientProp
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
+  const serverUrl = 'http://localhost:3001/'
   useEffect(() =>
   {
     getIngredients();
@@ -14,7 +15,7 @@ function App() {
 
   async function getIngredients() {
     try {
-      const apiUrl = 'http://localhost:3001/api/ingredients/'; // Replace with your API endpoint
+      const apiUrl = serverUrl + 'api/ingredients/'; // Replace with your API endpoint
       const response = await fetch(apiUrl);
 
       if (!response.ok) {
@@ -33,7 +34,7 @@ function App() {
     // Remove the ingredient with the specified id from the list
     //setIngredients((prevIngredients) => prevIngredients.filter((ingredient) => ingredient.id !== id));
     try {
-      const apiUrl = `http://localhost:3001/api/deleteingredient/${id}`; // Replace with your API endpoint
+      const apiUrl = serverUrl + `api/deleteingredient/${id}`; // Replace with your API endpoint
       const response = await fetch(apiUrl, {
         method: 'DELETE',
       });
@@ -53,7 +54,7 @@ function App() {
   const handleAddIngredient = async (ingredient: IngredientProperties) => {
     //setIngredients((prevIngredients) => [...prevIngredients, ingredient]);
     try {
-      const apiUrl = 'http://localhost:3001/api/addingredient'; // Replace with your API endpoint
+      const apiUrl = serverUrl + 'api/api/addingredient'; // Replace with your API endpoint
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -77,7 +78,11 @@ function App() {
 
   return (
     <div className="App">
-      <IngredientsPage ingredients={ingredients} onDeleteIngredient={handleDeleteIngredient} onAddIngredient={handleAddIngredient} />
+      <IngredientsPage ingredients={ingredients}
+                       onDeleteIngredient={handleDeleteIngredient}
+                       onAddIngredient={handleAddIngredient}
+                       onUpdateIngredient={() => {}}
+      />
     </div>
   );
 }
