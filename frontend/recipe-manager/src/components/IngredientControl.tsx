@@ -10,7 +10,11 @@ export function IngredientControl (props: IIngredientControlProps) {
   return (
     <div>
       <p>
-        {props.ingredient.properties.name}
+        <span>
+          Name: {props.ingredient.properties.name},
+          Unit: {props.ingredient.properties.unit},
+          Shelf life (days): {props.ingredient.properties.shelfLifeDays}
+        </span>
         <span>
             <button onClick={() => props.onDeleteIngredient(props.ingredient.id)}>X</button>
         </span>
