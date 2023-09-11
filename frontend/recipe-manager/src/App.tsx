@@ -6,11 +6,13 @@ import { Ingredient } from '../../../common/sharedtypes/Ingredient';
 import { IngredientProperties } from '../../../common/sharedtypes/IngredientProperties';
 import { RecipeHeader } from '../../../common/sharedtypes/Recipe';
 import RecipesPage from './components/RecipesPage';
+import { Link, BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [recipeHeaders, setRecipeHeaders] = useState<RecipeHeader[]>([])
   const serverUrl = 'http://localhost:3001/'
+
   useEffect(() =>
   {
     getIngredients();
@@ -118,12 +120,25 @@ function App() {
 
   return (
     <div className="App">
-      <IngredientsPage ingredients={ingredients}
-                       onDeleteIngredient={handleDeleteIngredient}
-                       onAddIngredient={handleAddIngredient}
-                       onUpdateIngredient={handleUpdateIngredient}
-      />
-      <RecipesPage recipeHeaders={recipeHeaders} />
+      <span>
+        <Link className="headerButton" to="/ingredients">Ingredients</Link>
+        <Link className="headerButton" to="/recipes">Recipes</Link>
+      </span>
+      
+      <Routes>
+        <Route path='/ingredients' element={
+          <IngredientsPage ingredients={ingredients}
+            onDeleteIngredient={handleDeleteIngredient}
+            onAddIngredient={handleAddIngredient}
+            onUpdateIngredient={handleUpdateIngredient}
+          />
+        }
+        />
+        <Route path='/recipes' element={
+          <RecipesPage recipeHeaders={recipeHeaders} />
+        }
+        />
+      </Routes>
     </div>
   );
 }
