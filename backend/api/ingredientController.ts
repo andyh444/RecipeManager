@@ -2,9 +2,9 @@ import { Ingredient } from "../../common/sharedtypes/Ingredient";
 import { Request, Response } from 'express';
 import { IngredientProperties } from "../../common/sharedtypes/IngredientProperties";
 import IngredientsDataAccess from "./../DataAccess/ingredientsDataAccess";
-import DummyDataSource from "./../DataAccess/DummyDataSource";
+import DummyIngredientsDataSource from "../DataAccess/DummyIngredientsDataSource";
 
-IngredientsDataAccess.InjectDataSource(DummyDataSource);
+IngredientsDataAccess.InjectDataSource(DummyIngredientsDataSource);
 
 export default class IngredientController
 {
@@ -16,6 +16,11 @@ export default class IngredientController
 
     static async apiGetIngredients(req : Request, res: Response) {
         res.json(await IngredientsDataAccess.getIngredients());
+    }
+
+    static async apiGetIngredientById(req : Request, res: Response) {
+        const id:number = Number(req.params.id);
+        res.json(await IngredientsDataAccess.getIngredientById(id));
     }
 
     static async apiDeleteIngredientById(req : Request, res: Response) {

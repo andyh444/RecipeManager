@@ -1,6 +1,6 @@
 import { Ingredient } from "../../common/sharedtypes/Ingredient";
 import { IngredientProperties } from "../../common/sharedtypes/IngredientProperties";
-import IngredientsDataSource from "./IngredientsDataSource"
+import IngredientsDataSource from "./IngredientsDataSource";
 
 let dataSource:IngredientsDataSource
 
@@ -11,6 +11,10 @@ export default class IngredientsDataAccess {
 
     static async getIngredients(): Promise<Ingredient[]> {
         return await dataSource.getIngredients();
+    }
+
+    static async getIngredientById(id: number): Promise<Ingredient> {
+        return await dataSource.getIngredientById(id)
     }
 
     static async deleteIngredientById(id: number): Promise<boolean> {

@@ -15,6 +15,7 @@ export function IngredientEditor (props: IIngredientEditorProps) {
         const ingredientProperties:IngredientProperties = {
             name: ingredientEntryRef.current?.value ?? "",
             unit: unitRef.current?.value ?? "",
+            itemSize: 1,
             shelfLifeDays: Number(shelfLifeRef.current?.value ?? 1)
             };
         return ingredientProperties

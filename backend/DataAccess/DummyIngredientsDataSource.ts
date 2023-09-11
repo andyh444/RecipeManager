@@ -4,13 +4,16 @@ import IngredientsDataSource from "./IngredientsDataSource";
 
 let ingredientIndex = 0;
 let ingredients:Ingredient[] = [
-    { id: ingredientIndex++, properties: { name: 'Egg', unit: 'single', shelfLifeDays: 365 } },
-    { id: ingredientIndex++, properties: { name: 'Ham', unit: 'gram', shelfLifeDays: 7 } },
-    { id: ingredientIndex++, properties: { name: 'Chips', unit: 'gram', shelfLifeDays: 365 } },
+    { id: ingredientIndex++, properties: { name: 'Egg', unit: 'single', itemSize: 6, shelfLifeDays: 365 } },
+    { id: ingredientIndex++, properties: { name: 'Ham', unit: 'gram', itemSize: 500, shelfLifeDays: 7 } },
+    { id: ingredientIndex++, properties: { name: 'Chips', unit: 'gram', itemSize: 1500, shelfLifeDays: 365 } },
 ]
-let DummyDataSource:IngredientsDataSource = {
+let DummyIngredientsDataSource:IngredientsDataSource = {
     getIngredients: (): Promise<Ingredient[]> => {
         return Promise.resolve(ingredients);
+    },
+    getIngredientById: function (id: number): Promise<Ingredient> {
+        return Promise.resolve(ingredients[ingredients.findIndex((ingredient) => ingredient.id === id)]);
     },
     deleteIngredientById: (id: number): Promise<boolean> => {
         const index: number = ingredients.findIndex((ingredient) => ingredient.id === id);
@@ -31,12 +34,11 @@ let DummyDataSource:IngredientsDataSource = {
         const newIngredient: Ingredient = { id: id, properties: ingredient };
         const index: number = ingredients.findIndex((ingredient) => ingredient.id === id);
         if (index === -1) {
-
-        } else  {
+        } else {
             ingredients[index] = newIngredient;
         }
-        return Promise.resolve(newIngredient)
+        return Promise.resolve(newIngredient);
     }
 }
 
-export default DummyDataSource;
+export default DummyIngredientsDataSource;

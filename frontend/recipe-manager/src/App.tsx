@@ -4,18 +4,39 @@ import './App.css';
 import IngredientsPage from './components/IngredientsPage';
 import { Ingredient } from '../../../common/sharedtypes/Ingredient';
 import { IngredientProperties } from '../../../common/sharedtypes/IngredientProperties';
+import { RecipeHeader } from '../../../common/sharedtypes/Recipe';
+import RecipesPage from './components/RecipesPage';
 
 function App() {
-  const [ingredients, setIngredients] = useState([]);
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+  const [recipeHeaders, setRecipeHeaders] = useState<RecipeHeader[]>([])
   const serverUrl = 'http://localhost:3001/'
   useEffect(() =>
   {
     getIngredients();
+    getRecipeHeaders();
   }, []);
+
+  async function getRecipeHeaders() {
+    try {
+      const apiUrl = serverUrl + 'api/recipeHeaders/';
+      const response = await fetch(apiUrl);
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json(); // Parse the response body as JSON
+      console.log(data); // Handle the data received from the server
+      setRecipeHeaders(data);
+    } catch (error) {
+      console.error('Fetch error:', error); // Handle errors
+    }
+  }
 
   async function getIngredients() {
     try {
-      const apiUrl = serverUrl + 'api/ingredients/'; // Replace with your API endpoint
+      const apiUrl = serverUrl + 'api/ingredients/';
       const response = await fetch(apiUrl);
 
       if (!response.ok) {
@@ -34,7 +55,7 @@ function App() {
     // Remove the ingredient with the specified id from the list
     //setIngredients((prevIngredients) => prevIngredients.filter((ingredient) => ingredient.id !== id));
     try {
-      const apiUrl = serverUrl + `api/deleteingredient/${id}`; // Replace with your API endpoint
+      const apiUrl = serverUrl + `api/ingredients/${id}`;
       const response = await fetch(apiUrl, {
         method: 'DELETE',
       });
@@ -54,7 +75,7 @@ function App() {
   const handleAddIngredient = async (ingredient: IngredientProperties) => {
     //setIngredients((prevIngredients) => [...prevIngredients, ingredient]);
     try {
-      const apiUrl = serverUrl + 'api/addingredient'; // Replace with your API endpoint
+      const apiUrl = serverUrl + 'api/ingredients';
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -77,7 +98,7 @@ function App() {
   }
 
   const handleUpdateIngredient = async(id:number, ingredient:IngredientProperties) => {
-      const apiUrl = serverUrl + `api/updateingredient/${id}`; // Replace with your API endpoint
+      const apiUrl = serverUrl + `api/ingredients/${id}`; // Replace with your API endpoint
       const response = await fetch(apiUrl, {
         method: 'PUT',
         headers: {
@@ -102,6 +123,7 @@ function App() {
                        onAddIngredient={handleAddIngredient}
                        onUpdateIngredient={handleUpdateIngredient}
       />
+      <RecipesPage recipeHeaders={recipeHeaders} />
     </div>
   );
 }
