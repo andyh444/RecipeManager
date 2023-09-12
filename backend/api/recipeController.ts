@@ -6,7 +6,7 @@ RecipesDataAccess.InjectDataSource(DummyRecipesDataSource);
 
 export default class RecipeController {
     static async apiGetRecipeById(req : Request, res: Response) {
-        res.json(await RecipesDataAccess.getRecipeById(req.params.id));
+        res.json(await RecipesDataAccess.getRecipeById(Number(req.params.id)));
     }
 
     static async apiUpdateRecipeById(req : Request, res: Response) {

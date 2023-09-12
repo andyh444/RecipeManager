@@ -12,7 +12,7 @@ export default class RecipesDataAccess {
         throw new Error("Method not implemented.");
     }
 
-    static async getRecipeById(id: string): Promise<Recipe> {
+    static async getRecipeById(id: number): Promise<Recipe> {
         return await dataSource.getRecipeById(id);
     }
 

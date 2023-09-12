@@ -14,8 +14,8 @@ let DummyRecipesDataSource:RecipesDataSource = {
         });
         return Promise.resolve(headers);
     },
-    getRecipeById: function (id: string): Promise<Recipe> {
-        throw new Error("Function not implemented.");
+    getRecipeById: function (id: number): Promise<Recipe> {
+        return Promise.resolve(recipes[recipes.findIndex((recipe) => recipe.id === id)]);
     }
 }
 

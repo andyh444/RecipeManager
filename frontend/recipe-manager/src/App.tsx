@@ -4,7 +4,7 @@ import './App.css';
 import IngredientsPage from './components/IngredientsPage';
 import { Ingredient } from '../../../common/sharedtypes/Ingredient';
 import { IngredientProperties } from '../../../common/sharedtypes/IngredientProperties';
-import { RecipeHeader } from '../../../common/sharedtypes/Recipe';
+import { Recipe, RecipeHeader } from '../../../common/sharedtypes/Recipe';
 import RecipesPage from './components/RecipesPage';
 import { Link, BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
 import RecipePage from './components/RecipePage';
@@ -21,103 +21,72 @@ function App() {
     getRecipeHeaders();
   }, []);
 
-  async function getRecipeHeaders() {
+  async function callApi(endpoint:string, requestInit:RequestInit):Promise<any> {
     try {
-      const apiUrl = serverUrl + 'api/recipeHeaders/';
-      const response = await fetch(apiUrl);
+      const apiUrl = serverUrl + endpoint;
+      const response = await fetch(apiUrl, requestInit);
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
-      const data = await response.json(); // Parse the response body as JSON
-      console.log(data); // Handle the data received from the server
-      setRecipeHeaders(data);
+      return await response.json();
     } catch (error) {
-      console.error('Fetch error:', error); // Handle errors
+      console.error('Fetch error', error);
+      return null;
+    }
+  }
+
+  async function getRecipeHeaders() {
+    const data = await callApi('api/recipeHeaders/', { method: 'GET' });
+    if (data !== null) {
+      setRecipeHeaders(data);
     }
   }
 
   async function getIngredients() {
-    try {
-      const apiUrl = serverUrl + 'api/ingredients/';
-      const response = await fetch(apiUrl);
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json(); // Parse the response body as JSON
-      console.log(data); // Handle the data received from the server
+    const data = await callApi('api/ingredients/', { method: 'GET' });
+    if (data !== null) {
       setIngredients(data);
-    } catch (error) {
-      console.error('Fetch error:', error); // Handle errors
     }
   }
 
   const handleDeleteIngredient = async (id: number) => {
-    // Remove the ingredient with the specified id from the list
-    //setIngredients((prevIngredients) => prevIngredients.filter((ingredient) => ingredient.id !== id));
-    try {
-      const apiUrl = serverUrl + `api/ingredients/${id}`;
-      const response = await fetch(apiUrl, {
-        method: 'DELETE',
-      });
-  
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-  
-      const deletedIngredient = await response.json();
-      console.log('Deleted Ingredient:', deletedIngredient);
+    const data = await callApi(`api/ingredients/${id}`, { method: 'DELETE' });
+    if (data !== null) {
+      console.log('Deleted Ingredient:', data);
       getIngredients();
-    } catch (error) {
-      console.error('Delete error:', error);
     }
   };
 
   const handleAddIngredient = async (ingredient: IngredientProperties) => {
-    //setIngredients((prevIngredients) => [...prevIngredients, ingredient]);
-    try {
-      const apiUrl = serverUrl + 'api/ingredients';
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(ingredient),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-  
-      const addedIngredient = await response.json();
-      console.log('Added Ingredient:', addedIngredient);
-
+    const data = await callApi('api/ingredients', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(ingredient),
+    });
+    if (data !== null) {
       getIngredients();
-    } catch (error) {
-      console.error('Add error:', error);
     }
   }
 
   const handleUpdateIngredient = async(id:number, ingredient:IngredientProperties) => {
-      const apiUrl = serverUrl + `api/ingredients/${id}`; // Replace with your API endpoint
-      const response = await fetch(apiUrl, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(ingredient),
-      });
+    const data = await callApi(`api/ingredients/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(ingredient),
+    });
+    if (data !== null) {
+      getIngredients();
+    }
+  }
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-  
-      const addedIngredient = await response.json();
-
-      getIngredients()
+  const getRecipe = async(id:number):Promise<Recipe> => {
+    const data = await callApi(`api/recipes/${id}`, { method: 'GET'});
+    return data;
   }
 
   return (
@@ -141,7 +110,7 @@ function App() {
         }
         />
         <Route path='/recipes/:id' element={
-          <RecipePage />
+          <RecipePage getRecipe={getRecipe} />
         } />
       </Routes>
     </div>
