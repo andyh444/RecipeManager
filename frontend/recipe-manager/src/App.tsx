@@ -6,13 +6,15 @@ import { Ingredient } from '../../../common/sharedtypes/Ingredient';
 import { IngredientProperties } from '../../../common/sharedtypes/IngredientProperties';
 import { RecipeHeader } from '../../../common/sharedtypes/Recipe';
 import RecipesPage from './components/RecipesPage';
-import { Link, BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Link, BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
+import RecipePage from './components/RecipePage';
 
 function App() {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [recipeHeaders, setRecipeHeaders] = useState<RecipeHeader[]>([])
   const serverUrl = 'http://localhost:3001/'
 
+  
   useEffect(() =>
   {
     getIngredients();
@@ -138,6 +140,9 @@ function App() {
           <RecipesPage recipeHeaders={recipeHeaders} />
         }
         />
+        <Route path='/recipes/:id' element={
+          <RecipePage />
+        } />
       </Routes>
     </div>
   );

@@ -1,5 +1,6 @@
 import React from 'react'
 import { RecipeHeader } from '../../../../common/sharedtypes/Recipe';
+import { Link } from 'react-router-dom';
 
 interface RecipesPageProps {
     recipeHeaders: RecipeHeader[]
@@ -12,7 +13,7 @@ const RecipesPage: React.FC<RecipesPageProps> = (props) => {
             <h1>Recipes</h1>
             {
                 props.recipeHeaders.map(recipe => (
-                    <p key={recipe.id}>{recipe.name}</p>
+                    <p><Link to={`/recipes/${recipe.id}`} key={recipe.id}>{recipe.name}</Link></p>
                 ))
             }
         </div>
