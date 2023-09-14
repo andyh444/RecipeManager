@@ -10,7 +10,7 @@ export interface IIngredientEditorProps {
 export function IngredientEditor (props: IIngredientEditorProps) {
     const ingredientEntryRef = useRef<HTMLInputElement>(null);
     const shelfLifeRef = useRef<HTMLInputElement>(null);
-    const unitRef = useRef<HTMLInputElement>(null);
+    const unitRef = useRef<HTMLSelectElement>(null);
 
     let getIngredient = (): IngredientProperties => {
         const ingredientProperties:IngredientProperties = {
@@ -27,7 +27,12 @@ export function IngredientEditor (props: IIngredientEditorProps) {
             <span>
                 <input ref={ingredientEntryRef} defaultValue={props.initialProperties?.name ?? ""} placeholder='Enter an ingredient'></input>
                 <input ref={shelfLifeRef} defaultValue={props.initialProperties?.shelfLifeDays} type='number' min={ 1 } placeholder='Enter a shelf life (Days)'></input>
-                <input ref={unitRef} defaultValue={props.initialProperties?.unit} placeholder='Enter a unit (gram, millilitre, single)'></input>
+                <select ref={unitRef} defaultValue={props.initialProperties?.unit}>
+                    <option></option>
+                    <option>Gram</option>
+                    <option>Millilitre</option>
+                    <option>Single</option>
+                </select>
                 <button onClick={() => props.onFinish(getIngredient())}>{props.buttonText}</button>
             </span>
         </div>  

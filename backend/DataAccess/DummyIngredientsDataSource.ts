@@ -4,9 +4,9 @@ import IngredientsDataSource from "./IngredientsDataSource";
 
 let ingredientIndex = 0;
 let ingredients:Ingredient[] = [
-    { id: ingredientIndex++, properties: { name: 'Egg', unit: 'single', itemSize: 6, shelfLifeDays: 365 } },
-    { id: ingredientIndex++, properties: { name: 'Ham', unit: 'gram', itemSize: 500, shelfLifeDays: 7 } },
-    { id: ingredientIndex++, properties: { name: 'Chips', unit: 'gram', itemSize: 1500, shelfLifeDays: 365 } },
+    { id: ingredientIndex++, properties: { name: 'Egg', unit: 'Single', itemSize: 6, shelfLifeDays: 365 } },
+    { id: ingredientIndex++, properties: { name: 'Ham', unit: 'Gram', itemSize: 500, shelfLifeDays: 7 } },
+    { id: ingredientIndex++, properties: { name: 'Chips', unit: 'Gram', itemSize: 1500, shelfLifeDays: 365 } },
 ]
 let DummyIngredientsDataSource:IngredientsDataSource = {
     getIngredients: (): Promise<Ingredient[]> => {
