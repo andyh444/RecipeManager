@@ -3,8 +3,40 @@ import RecipesDataSource from "./RecipesDataSource";
 
 let recipeIndex = 0;
 let recipes:Recipe[] = [
-    { id:recipeIndex++, properties:{name:"Ham, Egg 'n' chips", contents:[]} },
-    { id:recipeIndex++, properties:{name:"Spaghetti Carbonara", contents:[]} }
+    {
+        id:recipeIndex++,
+        properties:{
+            name:"Ham, Egg 'n' chips",
+            contents:[
+                {
+                    options: [
+                        {
+                            ingredientId: 0,
+                            preferability: 0,
+                            amountPerServing: 1
+                        },
+                        {
+                            ingredientId: 1,
+                            preferability: 0,
+                            amountPerServing: 1
+                        },
+                        {
+                            ingredientId: 2,
+                            preferability: 0,
+                            amountPerServing: 1
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        id:recipeIndex++,
+        properties:{
+            name:"Spaghetti Carbonara",
+            contents:[]
+        }
+    }
 ]
 
 let DummyRecipesDataSource:RecipesDataSource = {

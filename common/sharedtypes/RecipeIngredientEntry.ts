@@ -5,7 +5,7 @@ export interface RecipeIngredientEntry {
 }
 
 export interface RecipeIngredientOption {
-    ingredient:Ingredient
+    ingredientId:number
     preferability:number
     amountPerServing:number
 }

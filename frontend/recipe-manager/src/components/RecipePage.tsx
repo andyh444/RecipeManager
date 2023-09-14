@@ -12,9 +12,14 @@ const RecipePage: React.FC<RecipePageProps> = (props) => {
     props.getRecipe(Number(id))
         .then(d => setRecipe(d));
     return (
-        <h2>
-            {recipe?.properties.name}
-        </h2>
+        <React.Fragment>
+            <h2>{recipe?.properties.name}</h2>
+            {
+            recipe?.properties.contents.map((ingredientEntry, i) => (
+                    <p key={i}>{ingredientEntry.options[0].ingredientId}</p>
+                ))
+            }
+        </React.Fragment>
     )
 }
 
