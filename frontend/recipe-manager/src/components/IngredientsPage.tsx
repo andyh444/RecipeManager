@@ -23,7 +23,7 @@ const IngredientsPage: React.FC<IngredientsPageProps> = (props) => {
   };
 
   return  (
-    <div>
+    <React.Fragment>
         <h1>Ingredients</h1>
         <IngredientEditor initialProperties={null} buttonText='Add' onFinish={i => props.onAddIngredient(i)} />
         {props.ingredients.map((ingredient) => (
@@ -43,7 +43,7 @@ const IngredientsPage: React.FC<IngredientsPageProps> = (props) => {
             }
         </div>
         ))}
-    </div>
+    </React.Fragment>
   );
 };
 

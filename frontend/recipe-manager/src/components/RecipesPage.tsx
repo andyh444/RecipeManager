@@ -9,14 +9,14 @@ interface RecipesPageProps {
 const RecipesPage: React.FC<RecipesPageProps> = (props) => {
     console.log("Recipes:", props.recipeHeaders);
     return (
-        <div>
+        <React.Fragment>
             <h1>Recipes</h1>
             {
                 props.recipeHeaders.map((recipe, index) => (
                     <p key={index}><Link to={`/recipes/${recipe.id}`} key={recipe.id}>{recipe.name}</Link></p>
                 ))
             }
-        </div>
+        </React.Fragment>
     )
 }
 

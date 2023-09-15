@@ -9,7 +9,7 @@ export interface IIngredientControlProps {
 
 export function IngredientControl (props: IIngredientControlProps) {
   return (
-    <div>
+    <React.Fragment>
       <p>
         <span>
           Name: {props.ingredient.properties.name},
@@ -21,6 +21,6 @@ export function IngredientControl (props: IIngredientControlProps) {
             <button onClick={() => props.onDeleteIngredient(props.ingredient.id)}>X</button>
         </span>
       </p>
-    </div>
+    </React.Fragment>
   );
 }
