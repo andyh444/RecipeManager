@@ -85,8 +85,10 @@ function App() {
   }
 
   const getRecipe = async(id:number):Promise<Recipe> => {
-    const data = await callApi(`api/recipes/${id}`, { method: 'GET'});
-    return data;
+    return await callApi(`api/recipes/${id}`, { method: 'GET'});
+  }
+  const getIngredient = async(id:number):Promise<Ingredient> => {
+    return await callApi(`api/ingredients/${id}`, { method: 'GET'});
   }
 
   return (
@@ -110,7 +112,7 @@ function App() {
         }
         />
         <Route path='/recipes/:id' element={
-          <RecipePage getRecipe={getRecipe} />
+          <RecipePage getRecipe={getRecipe} getIngredient={getIngredient} />
         } />
       </Routes>
     </div>

@@ -12,8 +12,8 @@ const RecipesPage: React.FC<RecipesPageProps> = (props) => {
         <div>
             <h1>Recipes</h1>
             {
-                props.recipeHeaders.map(recipe => (
-                    <p><Link to={`/recipes/${recipe.id}`} key={recipe.id}>{recipe.name}</Link></p>
+                props.recipeHeaders.map((recipe, index) => (
+                    <p key={index}><Link to={`/recipes/${recipe.id}`} key={recipe.id}>{recipe.name}</Link></p>
                 ))
             }
         </div>

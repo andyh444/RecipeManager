@@ -14,18 +14,23 @@ let recipes:Recipe[] = [
                             ingredientId: 0,
                             preferability: 0,
                             amountPerServing: 1
-                        },
+                        }]
+                },
+                {
+                    options: [
                         {
                             ingredientId: 1,
                             preferability: 0,
                             amountPerServing: 1
-                        },
+                        }]
+                },
+                {
+                    options: [
                         {
                             ingredientId: 2,
                             preferability: 0,
                             amountPerServing: 1
-                        }
-                    ]
+                        }]
                 }
             ]
         }
