@@ -11,7 +11,7 @@ let recipes:Recipe[] = [
                 {
                     options: [
                         {
-                            ingredientId: 0,
+                            ingredientId: 0, // Egg
                             preferability: 0,
                             amountPerServing: 1
                         }]
@@ -19,17 +19,17 @@ let recipes:Recipe[] = [
                 {
                     options: [
                         {
-                            ingredientId: 1,
+                            ingredientId: 1, // Ham
                             preferability: 0,
-                            amountPerServing: 1
+                            amountPerServing: 200
                         }]
                 },
                 {
                     options: [
                         {
-                            ingredientId: 2,
+                            ingredientId: 2, // Chips
                             preferability: 0,
-                            amountPerServing: 1
+                            amountPerServing: 125
                         }]
                 }
             ]
